@@ -5,6 +5,9 @@ export default function StartScreen() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [smoothCoords, setSmoothCoords] = useState({ x: 0, y: 0 });
 
+  const [scaleBubble, setScaleBubble] = useState(0);
+  const [rotateBubble, setRotateBubble] = useState(-180);
+
   const handleMouseMove = (event) => {
     const { innerWidth, innerHeight } = window;
     const x = (event.clientX / innerWidth - 0.5) * 2;
@@ -12,7 +15,21 @@ export default function StartScreen() {
     setCoords({ x, y });
   };
 
-  // плавное движение (инерция)
+  useEffect(() => {
+    let start = null;
+
+    const animate = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / 400, 1);
+      setScaleBubble(progress);
+      setRotateBubble(-180 + progress * 180);
+
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setSmoothCoords((prev) => ({
@@ -48,9 +65,11 @@ export default function StartScreen() {
             translate(${smoothCoords.x * 50}px, ${smoothCoords.y * 50}px)
             rotateX(${smoothCoords.y * 30}deg)
             rotateY(${smoothCoords.x * 30}deg)
-            scale(1.05)
           `,
-          transition: "transform 0.05s ease-out",
+          scale: scaleBubble,
+          rotate: rotateBubble + "deg",
+          transition:
+            "transform 0.05s ease-out scale 0.4s linear rotate 0.4s linear",
           filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.2))",
         }}
       />

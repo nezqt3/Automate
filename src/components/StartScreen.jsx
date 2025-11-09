@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Bubble from "../static/buble-main.png";
 
+const words = ["ваш бизнес", "на", "полном", "автопилоте"];
+
 export default function StartScreen() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [smoothCoords, setSmoothCoords] = useState({ x: 0, y: 0 });
@@ -11,7 +13,6 @@ export default function StartScreen() {
   const [opacityHeader, setOpacityHeader] = useState(0);
   const [translateY, setTranslateY] = useState(-10);
 
-  const words = ["ваш бизнес", "на", "полном", "автопилоте"];
   const [displayedWords, setDisplayedWords] = useState(["", "", "", ""]);
 
   const currentWordRef = useRef(0);

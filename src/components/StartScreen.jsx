@@ -106,6 +106,8 @@ export default function StartScreen() {
             style={{
               opacity: 1,
               transition: `opacity 0.3s ease ${i * 0.05}s`,
+              animation: `fadeInLetter 0.4s forwards`,
+              animationDelay: `${i * 0.05}s`,
             }}
           >
             {letter}
@@ -118,6 +120,8 @@ export default function StartScreen() {
             style={{
               opacity: 1,
               transition: `opacity 0.3s ease ${i * 0.05}s`,
+              animation: `fadeInLetter 0.4s forwards`,
+              animationDelay: `${i * 0.05}s`,
             }}
           >
             {letter}
@@ -130,6 +134,8 @@ export default function StartScreen() {
             style={{
               opacity: 1,
               transition: `opacity 0.3s ease ${i * 0.05}s`,
+              animation: `fadeInLetter 0.4s forwards`,
+              animationDelay: `${i * 0.05}s`,
             }}
           >
             {letter}
@@ -143,6 +149,8 @@ export default function StartScreen() {
               style={{
                 opacity: 1,
                 transition: `opacity 0.3s ease ${i * 0.05}s`,
+                animation: `fadeInLetter 0.4s forwards`,
+                animationDelay: `${i * 0.05}s`,
               }}
             >
               {letter}

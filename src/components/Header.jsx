@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 
+const navigationElements = [
+  { text: "Главная", target: "start-screen" },
+  { text: "Решения", target: "" },
+  { text: "Кейсы", target: "" },
+  { text: "О нас", target: "" },
+  { text: "Контакты", target: "" },
+];
+
 export default function Header() {
   const [opacityHeader, setOpacityHeader] = useState(0);
   const [translateY, setTranslateY] = useState(-10);
@@ -31,11 +39,24 @@ export default function Header() {
       <p className="header-logo">automate.</p>
 
       <nav className="header-navigation">
-        <p className="header-navigation-text">Главная</p>
-        <p className="header-navigation-text">Решения</p>
-        <p className="header-navigation-text">Кейсы</p>
-        <p className="header-navigation-text">О нас</p>
-        <p className="header-navigation-text">Контакты</p>
+        {navigationElements.map((elem, id) => {
+          return (
+            <p
+              key={id}
+              className="header-navigation-text"
+              onClick={() => {
+                const section = document.getElementById(elem.target);
+                if (section) {
+                  section.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }
+              }}
+            >
+              {elem.text}
+            </p>
+          );
+        })}
       </nav>
 
       <button className="header-button">Бесплатная консультация</button>

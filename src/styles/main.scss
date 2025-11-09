@@ -1,3 +1,5 @@
+@import "../styles/_variables";
+
 * {
   margin: 0;
   padding: 0;
@@ -9,12 +11,9 @@
   padding: 30px 65px;
 }
 
-:root {
-  --white-color: "#FFFFFF";
-  --light-white-color: rgba(255, 255, 255, 0.6);
-  --light-green: rgba(139, 225, 73, 1);
-  --black-color: rgba(14, 14, 14, 1);
-  --gray-color: rgba(58, 58, 58, 1);
+body {
+  background-color: $black-color;
 }
 
 @import url("../styles/start-screen.scss");
+@import url("../styles/header.scss");

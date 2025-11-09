@@ -1,0 +1,58 @@
+@import "../styles/_variables.scss";
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &-logo {
+    color: $light-green;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -2%;
+    text-transform: lowercase;
+  }
+
+  &-navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+
+    &-text {
+      font-weight: 500;
+      font-style: Medium;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: -2%;
+      cursor: pointer;
+      color: $white-color;
+    }
+
+    &-text:hover {
+      color: $light-green;
+    }
+  }
+
+  &-button {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: -2%;
+    opacity: 1;
+    border-radius: 30px;
+    padding: 15px 30px;
+    background-color: $white-color;
+    color: $black-color;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  &-button:hover {
+    background-color: $light-green;
+    color: $white-color;
+  }
+}

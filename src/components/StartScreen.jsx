@@ -1,3 +1,3 @@
 export default function StartScreen() {
-  return <div>start</div>;
+  return <div>start-screen</div>;
 }

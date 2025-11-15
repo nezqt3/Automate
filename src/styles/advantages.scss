@@ -56,7 +56,32 @@
 
     &-button {
       display: inline-flex;
+      background-color: $black-color;
+      padding: 17px 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+      gap: 5px;
+      border-radius: 30px;
+      outline: none;
+      color: white;
+      border: 1px solid $black-color;
       flex: 0 0 auto;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: -2%;
+      text-align: center;
+    }
+
+    &-button::after {
+      content: "";
+      width: 9px;
+      margin-top: 2px;
+      height: 9px;
+      display: block;
+      background-image: url('../static/arrow-45.svg');
     }
   }
 
@@ -91,7 +116,34 @@
 
     &-button {
       display: inline-flex;
+      background-color: transparent;
+      padding: 17px 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+      gap: 5px;
+      border-radius: 30px;
+      outline: none;
+      color: white;
+      border: 1px solid $ten-white-color;
       flex: 0 0 auto;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: -2%;
+      text-align: center;
+    }
+
+    &-button::after {
+      content: "";
+      width: 9px;
+      height: 9px;
+      align-items: center;
+      text-align: center;
+      display: block;
+      margin-top: 2px;
+      background-image: url('../static/arrow-45.svg');
     }
   }
 

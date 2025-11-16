@@ -27,16 +27,19 @@
 
   &-dark-gray {
     cursor: pointer;
-    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
     border-radius: 40px;
     padding: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    
     align-items: center;
     background-color: $dark-gray-color;
-    background-color: 2px solid $dark-gray-color;
+    border: 2px solid $dark-gray-color;
+    transition: background-color 0.3s, color 0.3s, filter 0.3s;
 
     &-image {
       width: 60px;
@@ -45,11 +48,13 @@
     }
 
     &-title {
+      white-space: pre-line;
       color: $white-color;
       margin-bottom: 20px;
     }
 
     &-text {
+      white-space: pre-line;
       color: $light-white-color;
       margin-bottom: 66px;
     }
@@ -73,16 +78,31 @@
       line-height: 120%;
       letter-spacing: -2%;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s, filter 0.3s;
+
+      &::after {
+        content: "";
+        width: 9px;
+        margin-top: 2px;
+        height: 9px;
+        display: block;
+        background-image: url('../static/arrow-45.svg');
+      }
+
     }
 
-    &-button::after {
-      content: "";
-      width: 9px;
-      margin-top: 2px;
-      height: 9px;
-      display: block;
-      background-image: url('../static/arrow-45.svg');
-    }
+    &:hover {
+        background-color: $gray-color;
+
+        .advantages-dark-gray-button {
+          background-color: white;
+          color: black;
+
+          &::after {
+            filter: invert(100%);
+          }
+        }
+      }
   }
 
   &-non-bg {
@@ -97,6 +117,7 @@
     background-color: transparent;
     border-radius: 40px;
     border: 2px solid rgb(255, 255, 255, 0.1);
+    transition: background-color 0.3s, color 0.3s, filter 0.3s;
 
     &-image {
       width: 60px;
@@ -105,11 +126,13 @@
     }
 
     &-title {
+      white-space: pre-line;
       color: $white-color;
       margin-bottom: 20px;
     }
 
     &-text {
+      white-space: pre-line;
       color: $light-white-color;
       margin-bottom: 66px;
     }
@@ -133,18 +156,33 @@
       line-height: 120%;
       letter-spacing: -2%;
       text-align: center;
+      transition: background-color 0.3s, color 0.3s, filter 0.3s;
+
+      &::after {
+        content: "";
+        width: 9px;
+        height: 9px;
+        align-items: center;
+        text-align: center;
+        display: block;
+        margin-top: 2px;
+        background-image: url('../static/arrow-45.svg');
+      }
+
     }
 
-    &-button::after {
-      content: "";
-      width: 9px;
-      height: 9px;
-      align-items: center;
-      text-align: center;
-      display: block;
-      margin-top: 2px;
-      background-image: url('../static/arrow-45.svg');
-    }
+    &:hover {
+        background-color: $dark-gray-color;
+
+        .advantages-non-bg-button {
+          background-color: white;
+          color: black;
+
+          &::after {
+            filter: invert(100%);
+          }
+        }
+      }
   }
 
   &-bg-title {

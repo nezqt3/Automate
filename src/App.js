@@ -3,6 +3,7 @@ import "../src/styles/main.scss";
 import Header from "./components/Header";
 import Advantages from "./components/Advantages";
 import Difference from "./components/Difference";
+import Costs from "./components/Costs";
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <Header />
       <StartScreen />
       <Advantages />
-      <Difference/>
+      <Difference />
+
+      <Costs />
     </div>
   );
 }

@@ -1,123 +1,17 @@
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import DarkImage from "../static/black-bubble.png";
 import GrayImage from "../static/gray-bubble.png";
 
 export default function Advantages() {
-
-  const [animations, setAnimations] = useState({
-    card1: { opacity: 0, translateY: 10 },
-    card2: { opacity: 0, translateY: 10 },
-    card3: { opacity: 0, translateY: 10 },
-    card4: { opacity: 0, translateY: 10 },
-    card5: { opacity: 0, translateY: 10 },
-  });
-
   const [titleAnimation, setTitleAnimation] = useState({
     letters: [],
     isAnimated: false,
   });
 
-
-  // Рефы для каждого блока
-  const card1Ref = useInView({ threshold: 0.2, triggerOnce: true });
-  const card2Ref = useInView({ threshold: 0.2, triggerOnce: true });
-  const card3Ref = useInView({ threshold: 0.2, triggerOnce: true });
-  const card4Ref = useInView({ threshold: 0.2, triggerOnce: true });
-  const card5Ref = useInView({ threshold: 0.2, triggerOnce: true });
-
-  // Эффект для каждого блока — запускает анимацию при inView
-  useEffect(() => {
-    if (card1Ref.inView) animateCard("card1");
-  }, [card1Ref.inView]);
-
-
-  useEffect(() => {
-    if (card2Ref.inView) animateCard("card2");
-  }, [card2Ref.inView]);
-
-
-  useEffect(() => {
-    if (card3Ref.inView) animateCard("card3");
-  }, [card3Ref.inView]);
-
-
-  useEffect(() => {
-    if (card4Ref.inView) animateCard("card4");
-  }, [card4Ref.inView]);
-
-  useEffect(() => {
-    if (card5Ref.inView) animateCard("card5");
-  }, [card5Ref.inView]);
-
-  useEffect(() => {
-  if (card1Ref.inView && !titleAnimation.isAnimated) {
-    const text = "automate.";
-    const letters = text.split('').map((char, index) => ({
-      char,
-      opacity: 0,
-      translateY: 20,
-      delay: index * 50, // задержка между буквами: 50мс
-    }));
-
-    setTitleAnimation({ letters, isAnimated: true });
-
-    let start = null;
-    const animate = (timestamp) => {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-
-      setTitleAnimation((prev) => {
-        const updatedLetters = prev.letters.map((letter) => {
-          if (elapsed >= letter.delay) {
-            const progress = Math.min((elapsed - letter.delay) / 300, 1); // 300мс на анимацию
-            return {
-              ...letter,
-              opacity: progress,
-              translateY: 40 - progress * 40, // от 20px до 0
-            };
-          }
-          return letter;
-        });
-        return { ...prev, letters: updatedLetters };
-      });
-
-      if (elapsed < letters.length * 50 + 300) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }
-}, [card1Ref.inView, titleAnimation.isAnimated]);
-
-
-  // Функция анимации
-  const animateCard = (cardKey) => {
-    let start = null;
-    const animate = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / 400, 1); // 400 мс
-
-      setAnimations((prev) => ({
-        ...prev,
-        [cardKey]: {
-          opacity: progress,
-          translateY: 10 - progress * 10, // от 10px до 0px
-        },
-      }));
-
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-    requestAnimationFrame(animate);
-  };
-
-  const [activeFirstCard, setActiveFirstCard] = useState(false);
-  const [activeSecondCard, setActiveSecondCard] = useState(false);
-  const [activeThirdCard, setActiveThirdCard] = useState(false);
-  const [activeFourthCard, setActiveFourthCard] = useState(false);
-  const [activeFifthCard, setActiveFifthCard] = useState(false);
+  const [activeCards, setActiveCards] = useState([false, false, false, false, false]);
 
   const content = [
     {
@@ -152,131 +46,183 @@ export default function Advantages() {
     },
   ];
 
-  const renderTextWithBreaks = (text) => {
-    return text.split('\n').map((line, index, array) => {
-      if (line === '') {
-        return <br key={`empty-${index}`} />;
-      } else {
-        return (
-          <span key={index}>
-            {line}
-            {index < array.length - 1 && <br />}
-          </span>
-        );
-      }
+  const renderTextWithBreaks = (text) =>
+    text.split("\n").map((line, index, array) =>
+      line === "" ? (
+        <br key={`empty-${index}`} />
+      ) : (
+        <span key={index}>
+          {line}
+          {index < array.length - 1 && <br />}
+        </span>
+      )
+    );
+
+  // Отдельные refs для каждой карточки
+  const card1Ref = useInView({ threshold: 0.2, triggerOnce: true });
+  const card2Ref = useInView({ threshold: 0.2, triggerOnce: true });
+  const card3Ref = useInView({ threshold: 0.2, triggerOnce: true });
+  const card4Ref = useInView({ threshold: 0.2, triggerOnce: true });
+  const card5Ref = useInView({ threshold: 0.2, triggerOnce: true });
+
+  useEffect(() => {
+    if (card1Ref.inView && !titleAnimation.isAnimated) {
+      const text = "automate.";
+      const letters = text.split("").map((char, index) => ({
+        char,
+        delay: index * 0.05,
+      }));
+      setTitleAnimation({ letters, isAnimated: true });
+    }
+  }, [card1Ref.inView, titleAnimation.isAnimated]);
+
+  const handleMouse = (index, state) => {
+    setActiveCards((prev) => {
+      const copy = [...prev];
+      copy[index] = state;
+      return copy;
     });
   };
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.05, duration: 0.3 },
+    }),
+  };
 
   return (
-    <div className="advantages" >
+    <div className="advantages">
       <div className="advantages-left">
-        <div className="advantages-dark-gray" onMouseEnter={() => setActiveFirstCard(true)} onMouseLeave={() => setActiveFirstCard(false)} ref={card1Ref.ref}
-          style={{
-            opacity: animations.card1.opacity,
-            transform: `translateY(${animations.card1.translateY}px)`,
-            transition: "opacity 0.4s linear, transform 0.4s linear",
-            }}>
-          <img
-            className="advantages-dark-gray-image"
-            src={DarkImage}
-            alt="dark"
-          />
+        <motion.div
+          ref={card1Ref.ref}
+          initial="hidden"
+          animate={card1Ref.inView ? "visible" : "hidden"}
+          variants={cardVariants}
+          className="advantages-dark-gray"
+          onMouseEnter={() => handleMouse(0, true)}
+          onMouseLeave={() => handleMouse(0, false)}
+        >
+          <img className="advantages-dark-gray-image" src={DarkImage} alt="dark" />
           <span>
-            <p className="advantages-dark-gray-title">{activeFirstCard ? content[0].activeTitle : content[0].nonActiveTitle}</p>
+            <p className="advantages-dark-gray-title">
+              {activeCards[0] ? content[0].activeTitle : content[0].nonActiveTitle}
+            </p>
             <p className="advantages-dark-gray-text">
-              {activeFirstCard ? content[0].activeText : content[0].nonActiveText}
+              {activeCards[0] ? content[0].activeText : content[0].nonActiveText}
             </p>
           </span>
           <button className="advantages-dark-gray-button">Решение</button>
-        </div>
+        </motion.div>
+
         <div className="advantages-left-down">
-          <div className="advantages-non-bg" onMouseEnter={() => setActiveSecondCard(true)} onMouseLeave={() => setActiveSecondCard(false)} ref={card2Ref.ref}
-          style={{
-            opacity: animations.card2.opacity,
-            transform: `translateY(${animations.card2.translateY}px)`,
-            transition: "opacity 0.4s linear, transform 0.4s linear",
-            }}>
-            <img
-              className="advantages-non-bg-image"
-              src={GrayImage}
-              alt="dark"
-            />
-            <p className="advantages-non-bg-title">{activeSecondCard ? content[1].activeTitle : content[1].nonActiveTitle}</p>
+          <motion.div
+            ref={card2Ref.ref}
+            initial="hidden"
+            animate={card2Ref.inView ? "visible" : "hidden"}
+            variants={cardVariants}
+            className="advantages-non-bg"
+            onMouseEnter={() => handleMouse(1, true)}
+            onMouseLeave={() => handleMouse(1, false)}
+          >
+            <img className="advantages-non-bg-image" src={GrayImage} alt="gray" />
+            <p className="advantages-non-bg-title">
+              {activeCards[1] ? content[1].activeTitle : content[1].nonActiveTitle}
+            </p>
             <p className="advantages-non-bg-text">
-              {renderTextWithBreaks(activeSecondCard ? content[1].activeText : content[1].nonActiveText)}
+              {activeCards[1]
+                ? renderTextWithBreaks(content[1].activeText)
+                : renderTextWithBreaks(content[1].nonActiveText)}
             </p>
             <button className="advantages-non-bg-button">Решение</button>
-          </div>
-          <div className="advantages-dark-gray" onMouseEnter={() => setActiveThirdCard(true)} onMouseLeave={() => setActiveThirdCard(false)} ref={card3Ref.ref}
-          style={{
-            opacity: animations.card3.opacity,
-            transform: `translateY(${animations.card3.translateY}px)`,
-            transition: "opacity 0.4s linear, transform 0.4s linear",
-            }}>
-            <img
-              className="advantages-dark-gray-image"
-              src={DarkImage}
-              alt="dark"
-            />
-            <p className="advantages-dark-gray-title">{activeThirdCard ? content[2].activeTitle : content[2].nonActiveTitle}</p>
+          </motion.div>
+
+          <motion.div
+            ref={card3Ref.ref}
+            initial="hidden"
+            animate={card3Ref.inView ? "visible" : "hidden"}
+            variants={cardVariants}
+            className="advantages-dark-gray"
+            onMouseEnter={() => handleMouse(2, true)}
+            onMouseLeave={() => handleMouse(2, false)}
+          >
+            <img className="advantages-dark-gray-image" src={DarkImage} alt="dark" />
+            <p className="advantages-dark-gray-title">
+              {activeCards[2] ? content[2].activeTitle : content[2].nonActiveTitle}
+            </p>
             <p className="advantages-dark-gray-text">
-              {renderTextWithBreaks(activeThirdCard ? content[2].activeText : content[2].nonActiveText)}
+              {activeCards[2]
+                ? renderTextWithBreaks(content[2].activeText)
+                : renderTextWithBreaks(content[2].nonActiveText)}
             </p>
             <button className="advantages-dark-gray-button">Решение</button>
-          </div>
-        </div>
-      </div>
-      <div className="advantages-right">
-        <div className="advantages-non-bg" onMouseEnter={() => setActiveFourthCard(true)} onMouseLeave={() => setActiveFourthCard(false)} ref={card4Ref.ref}
-          style={{
-            opacity: animations.card4.opacity,
-            transform: `translateY(${animations.card4.translateY}px)`,
-            transition: "opacity 0.4s linear, transform 0.4s linear",
-            }}>
-          <img className="advantages-non-bg-image" src={GrayImage} alt="dark" />
-          <p className="advantages-non-bg-title">{activeFourthCard ? content[3].activeTitle : content[3].nonActiveTitle}</p>
-          <p className="advantages-non-bg-text">
-            {renderTextWithBreaks(activeFourthCard ? content[3].activeText : content[3].nonActiveText)}
-          </p>
-          <button className="advantages-non-bg-button">Решение</button>
-        </div>
-        <div className="advantages-dark-gray" onMouseEnter={() => setActiveFifthCard(true)} onMouseLeave={() => setActiveFifthCard(false)} ref={card5Ref.ref}
-          style={{
-            opacity: animations.card5.opacity,
-            transform: `translateY(${animations.card5.translateY}px)`,
-            transition: "opacity 0.4s linear, transform 0.4s linear",
-            }}>
-          <img
-            className="advantages-dark-gray-image"
-            src={DarkImage}
-            alt="dark"
-          />
-          <p className="advantages-dark-gray-title">
-            {activeFifthCard ? content[4].activeTitle : content[4].nonActiveTitle}
-          </p>
-          <p className="advantages-dark-gray-text">
-            {renderTextWithBreaks(activeFifthCard ? content[4].activeText : content[4].nonActiveText)}
-          </p>
-          <button className="advantages-dark-gray-button">Решение</button>
+          </motion.div>
         </div>
       </div>
 
-      
+      <div className="advantages-right">
+        <motion.div
+          ref={card4Ref.ref}
+          initial="hidden"
+          animate={card4Ref.inView ? "visible" : "hidden"}
+          variants={cardVariants}
+          className="advantages-non-bg"
+          onMouseEnter={() => handleMouse(3, true)}
+          onMouseLeave={() => handleMouse(3, false)}
+        >
+          <img className="advantages-non-bg-image" src={GrayImage} alt="gray" />
+          <p className="advantages-non-bg-title">
+            {activeCards[3] ? content[3].activeTitle : content[3].nonActiveTitle}
+          </p>
+          <p className="advantages-non-bg-text">
+            {activeCards[3]
+              ? renderTextWithBreaks(content[3].activeText)
+              : renderTextWithBreaks(content[3].nonActiveText)}
+          </p>
+          <button className="advantages-non-bg-button">Решение</button>
+        </motion.div>
+
+        <motion.div
+          ref={card5Ref.ref}
+          initial="hidden"
+          animate={card5Ref.inView ? "visible" : "hidden"}
+          variants={cardVariants}
+          className="advantages-dark-gray"
+          onMouseEnter={() => handleMouse(4, true)}
+          onMouseLeave={() => handleMouse(4, false)}
+        >
+          <img className="advantages-dark-gray-image" src={DarkImage} alt="dark" />
+          <p className="advantages-dark-gray-title">
+            {activeCards[4] ? content[4].activeTitle : content[4].nonActiveTitle}
+          </p>
+          <p className="advantages-dark-gray-text">
+            {activeCards[4]
+              ? renderTextWithBreaks(content[4].activeText)
+              : renderTextWithBreaks(content[4].nonActiveText)}
+          </p>
+          <button className="advantages-dark-gray-button">Решение</button>
+        </motion.div>
+      </div>
+
       <h2 className="advantages-bg-title" aria-label="automate.">
         {titleAnimation.letters.map((letter, index) => (
-          <span
+          <motion.span
             key={index}
-            style={{
-              display: 'inline-block',
-              opacity: letter.opacity,
-              transform: `translateY(${letter.translateY}px)`,
-              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
-              whiteSpace: 'pre', // сохраняет пробелы
-            }}
+            custom={index}
+            initial="hidden"
+            animate="visible"
+            variants={letterVariants}
+            style={{ display: "inline-block", whiteSpace: "pre" }}
           >
             {letter.char}
-          </span>
+          </motion.span>
         ))}
       </h2>
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const navigationElements = [
   { text: "Главная", target: "start-screen" },
@@ -9,57 +9,62 @@ const navigationElements = [
 ];
 
 export default function Header() {
-  const [opacityHeader, setOpacityHeader] = useState(0);
-  const [translateY, setTranslateY] = useState(-10);
+  const handleNavigationClick = (target) => {
+    const section = document.getElementById(target);
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
 
-  useEffect(() => {
-    let start = null;
+  const headerVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  };
 
-    const animate = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / 400, 1); // 0.8 сек
-      setOpacityHeader(progress);
-      setTranslateY(-10 + progress * 10); // от -10px до 0px
-
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  }, []);
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -5 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.05, duration: 0.3 },
+    }),
+  };
 
   return (
-    <div
+    <motion.div
       className="header"
-      style={{
-        opacity: opacityHeader,
-        transform: `translateY(${translateY}px)`,
-        transition: "opacity 0.4s linear, transform 0.4s linear",
-      }}
+      initial="hidden"
+      animate="visible"
+      variants={headerVariants}
     >
       <p className="header-logo">automate.</p>
 
       <nav className="header-navigation">
-        {navigationElements.map((elem, id) => {
-          return (
-            <p
-              key={id}
-              className="header-navigation-text"
-              onClick={() => {
-                const section = document.getElementById(elem.target);
-                if (section) {
-                  section.scrollIntoView({
-                    behavior: "smooth",
-                  });
-                }
-              }}
-            >
-              {elem.text}
-            </p>
-          );
-        })}
+        {navigationElements.map((elem, id) => (
+          <motion.p
+            key={id}
+            className="header-navigation-text"
+            custom={id}
+            initial="hidden"
+            animate="visible"
+            variants={navItemVariants}
+            onClick={() => handleNavigationClick(elem.target)}
+          >
+            {elem.text}
+          </motion.p>
+        ))}
       </nav>
 
-      <button className="header-button">Бесплатная консультация</button>
-    </div>
+      <motion.button
+        className="header-button"
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.4 }}
+      >
+        Бесплатная консультация
+      </motion.button>
+    </motion.div>
   );
 }

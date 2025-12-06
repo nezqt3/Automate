@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Bubble from "../static/buble-main.png";
+import Bubble from "../static/buble-main copy.png";
 
 const words = ["ваш бизнес", "на", "полном", "автопилоте"];
 

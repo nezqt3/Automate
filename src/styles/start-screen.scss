@@ -38,6 +38,8 @@
     width: 502px;
     z-index: 10;
     position: absolute;
+    will-change: transform;
+    transform-style: preserve-3d;
     right: 270px;
     top: -70px; 
   }

@@ -3,6 +3,7 @@ import "../src/styles/main.scss";
 import Header from "./components/Header";
 import Advantages from "./components/Advantages";
 import Difference from "./components/Difference";
+import Decisions from "./components/Decisions";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <StartScreen />
       <Advantages />
       <Difference/>
+
+      <Decisions/>
     </div>
   );
 }

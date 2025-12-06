@@ -1,0 +1,132 @@
+@import "./variables";
+
+.costs {
+  color: white;
+  margin-bottom: 192px;
+
+  &-header {
+    margin-bottom: 38px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    h2 {
+      font-family: "Manrope";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 68px;
+      line-height: 100%;
+      text-align: center;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+
+    p {
+      width: 380px;
+      opacity: 0.6;
+      color: $white-color-245;
+      font-size: 16px;
+    }
+  }
+
+  &-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      border-bottom: 1px solid $light-green;
+      tr {
+        text-align: left;
+
+        th {
+          padding: 20px 0;
+          font-family: "Manrope";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 120%;
+          color: $light-white-color;
+        }
+      }
+    }
+
+    tbody {
+      width: 100%;
+      tr {
+        border-bottom: 1px solid $light-green;
+        position: relative;
+        td {
+          padding: 35px 0;
+          width: 33%;
+
+          h3 {
+            font-family: "Manrope";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 100%;
+
+            color: #ffffff;
+          }
+
+          button {
+            font-family: "Manrope";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 120%;
+            text-align: center;
+            letter-spacing: -0.02em;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            gap: 10px;
+            background-color: transparent;
+            opacity: 0.6;
+            border: 1px solid $light-green;
+            border-radius: 50px;
+            color: $light-green;
+            transition: 0.3s all ease;
+            cursor: pointer;
+
+            &:hover {
+              color: $black-color;
+              background-color: $light-green;
+              opacity: 1;
+            }
+          }
+
+          p {
+            font-family: "Manrope";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 100%;
+            color: $white-color-245;
+          }
+        }
+
+        &::after {
+          content: "";
+          width: 44px;
+          height: 44px;
+          background-image: url("../static/arrow-with-circle.svg");
+          display: block;
+          position: absolute;
+          right: 0;
+          top: 35px;
+          transition: 0.3s all ease;
+          cursor: pointer;
+        }
+
+        &:hover::after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}

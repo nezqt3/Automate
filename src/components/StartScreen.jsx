@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Bubble from "../static/buble-main.png";
 
 const words = ["ваш бизнес", "на", "полном", "автопилоте"];
@@ -13,10 +14,7 @@ export default function StartScreen() {
   const [opacityHeader, setOpacityHeader] = useState(0);
   const [translateY, setTranslateY] = useState(-10);
 
-  const [displayedWords, setDisplayedWords] = useState(["", "", "", ""]);
-
-  const currentWordRef = useRef(0);
-  const currentLetterRef = useRef(0);
+  const [displayedWords, setDisplayedWords] = useState(words.map(() => ""));
 
   const handleMouseMove = (event) => {
     const { innerWidth, innerHeight } = window;
@@ -25,73 +23,79 @@ export default function StartScreen() {
     setCoords({ x, y });
   };
 
-  useEffect(() => {
-    let start = null;
-
-    const animate = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / 400, 1);
-      setScaleBubble(progress);
-      setRotateBubble(-180 + progress * 180);
-
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  }, []);
-
-  useEffect(() => {
-    let start = null;
-
-    const animate = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / 400, 1); // 0.8 сек
-      setOpacityHeader(progress);
-      setTranslateY(-10 + progress * 10); // от -10px до 0px
-
-      if (progress < 1) requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-  }, []);
-
+  // Плавное движение пузыря
   useEffect(() => {
     const interval = setInterval(() => {
       setSmoothCoords((prev) => ({
         x: prev.x + (coords.x - prev.x) * 0.1,
         y: prev.y + (coords.y - prev.y) * 0.1,
       }));
-    }, 16); // примерно 60fps
+    }, 16);
     return () => clearInterval(interval);
   }, [coords]);
 
+  // Анимация пузыря
+  useEffect(() => {
+    let start = null;
+    const animate = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / 400, 1);
+      setScaleBubble(progress);
+      setRotateBubble(-180 + progress * 180);
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, []);
+
+  // Анимация параграфа
+  useEffect(() => {
+    let start = null;
+    const animate = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / 400, 1);
+      setOpacityHeader(progress);
+      setTranslateY(-10 + progress * 10);
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, []);
+
+  // Анимация текста по буквам
   useEffect(() => {
     const lettersPerWord = words.map((w) => w.split(""));
+    let currentWord = 0;
+    let currentLetter = 0;
 
     const interval = setInterval(() => {
-      const cw = currentWordRef.current;
-      const cl = currentLetterRef.current;
-
-      if (cw >= lettersPerWord.length) {
+      if (currentWord >= lettersPerWord.length) {
         clearInterval(interval);
         return;
       }
 
       setDisplayedWords((prev) => {
         const newWords = [...prev];
-        newWords[cw] = lettersPerWord[cw].slice(0, cl + 1).join("");
+        if (lettersPerWord[currentWord]) {
+          newWords[currentWord] = lettersPerWord[currentWord]
+            .slice(0, currentLetter + 1)
+            .join("");
+        }
         return newWords;
       });
 
-      currentLetterRef.current++;
-      if (currentLetterRef.current >= lettersPerWord[cw].length) {
-        currentLetterRef.current = 0;
-        currentWordRef.current++;
+      currentLetter++;
+      if (lettersPerWord[currentWord] && currentLetter >= lettersPerWord[currentWord].length) {
+        currentLetter = 0;
+        currentWord++;
       }
     }, 50);
 
     return () => clearInterval(interval);
   }, []);
+
+  const letterVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  };
 
   return (
     <div
@@ -100,92 +104,63 @@ export default function StartScreen() {
       id="start-screen"
     >
       <h1 className="start-screen-title">
-        {displayedWords[0].split("").map((letter, i) => (
-          <span
-            key={i}
-            style={{
-              opacity: 1,
-              transition: `opacity 0.3s ease ${i * 0.05}s`,
-              animation: `fadeInLetter 0.4s forwards`,
-              animationDelay: `${i * 0.05}s`,
-            }}
-          >
-            {letter}
+        {displayedWords.slice(0, 3).map((word, wIdx) => (
+          <span key={wIdx}>
+            {word.split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                initial="hidden"
+                animate="visible"
+                variants={letterVariants}
+                transition={{ delay: i * 0.05 }}
+                style={{ display: "inline-block", whiteSpace: "pre" }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+            <br />
           </span>
         ))}
-        <br />
-        {displayedWords[1].split("").map((letter, i) => (
-          <span
-            key={i}
-            style={{
-              opacity: 1,
-              transition: `opacity 0.3s ease ${i * 0.05}s`,
-              animation: `fadeInLetter 0.4s forwards`,
-              animationDelay: `${i * 0.05}s`,
-            }}
-          >
-            {letter}
-          </span>
-        ))}
-        <br />
-        {displayedWords[2].split("").map((letter, i) => (
-          <span
-            key={i}
-            style={{
-              opacity: 1,
-              transition: `opacity 0.3s ease ${i * 0.05}s`,
-              animation: `fadeInLetter 0.4s forwards`,
-              animationDelay: `${i * 0.05}s`,
-            }}
-          >
-            {letter}
-          </span>
-        ))}
-        <br />
-        <span className="start-screen-title-span">
+
+        <span className="start-screen-title-span" style={{ display: "block", textAlign: "left" }}>
           {displayedWords[3].split("").map((letter, i) => (
-            <span
+            <motion.span
               key={i}
-              style={{
-                opacity: 1,
-                transition: `opacity 0.3s ease ${i * 0.05}s`,
-                animation: `fadeInLetter 0.4s forwards`,
-                animationDelay: `${i * 0.05}s`,
-              }}
+              initial="hidden"
+              animate="visible"
+              variants={letterVariants}
+              transition={{ delay: i * 0.05 }}
+              style={{ display: "inline-block", whiteSpace: "pre" }}
             >
               {letter}
-            </span>
+            </motion.span>
           ))}
         </span>
       </h1>
-      <p
+
+      <motion.p
         className="start-screen-text"
-        style={{
-          opacity: opacityHeader,
-          transform: `translateY(${translateY}px)`,
-          transition: "opacity 0.4s linear, transform 0.4s linear",
-        }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: opacityHeader, y: translateY }}
+        transition={{ duration: 0.4 }}
       >
         Бизнес — это не только прибыль, но и время, свобода и масштаб. Мы
         создаем умные системы, которые берут на себя рутину, устраняют ошибки и
         позволяют вам сосредоточиться на стратегическом развитии.
-      </p>
-      <img
+      </motion.p>
+
+      <motion.img
         src={Bubble}
         alt="bubble-main"
         className="start-screen-bubble"
-        style={{
-          transform: `
-            translate(${smoothCoords.x * 50}px, ${smoothCoords.y * 50}px)
-            rotateX(${smoothCoords.y * 30}deg)
-            rotateY(${smoothCoords.x * 30}deg)
-          `,
-          scale: scaleBubble,
+        animate={{
+          x: smoothCoords.x * 50,
+          y: smoothCoords.y * 50,
           rotate: rotateBubble + "deg",
-          transition:
-            "transform 0.05s ease-out scale 0.4s linear rotate 0.4s linear",
-          filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.2))",
+          scale: scaleBubble,
         }}
+        transition={{ type: "spring", stiffness: 50, damping: 20 }}
+        
       />
     </div>
   );

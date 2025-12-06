@@ -7,3 +7,4 @@
 ![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=fff)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?logo=framer&logoColor=fff)

@@ -3,6 +3,7 @@
 .start-screen {
   color: $white-color;
   margin-top: 119px;
+  overflow: visible !important;
   position: relative;
   margin-bottom: 240px;
 
@@ -19,6 +20,7 @@
 
     &-span {
       margin-left: 355px;
+      width: 100%;
       color: $light-green;
     }
   }
@@ -34,9 +36,10 @@
 
   &-bubble {
     width: 502px;
+    z-index: 10;
     position: absolute;
     right: 270px;
-    top: -70px;
+    top: -70px; 
   }
 }
 

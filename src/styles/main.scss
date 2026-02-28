@@ -1,9 +1,9 @@
-@import "../styles/_variables";
+@import '../styles/_variables';
 
 * {
   margin: 0;
   padding: 0;
-  font-family: "Manrope";
+  font-family: 'Manrope';
   box-sizing: border-box;
 }
 
@@ -13,12 +13,16 @@
 
 body {
   background-color: $black-color;
+  scroll-behavior: smooth;
 }
-  
-@import url("../styles/start-screen.scss");
-@import url("../styles/header.scss");
-@import url("../styles/advantages.scss");
-@import url("../styles/difference.scss");
-@import url("../styles/decisions.scss");
-@import url("../styles/costs.scss");
-@import url("../styles/footer.scss");
+
+@import url('../styles/start-screen.scss');
+@import url('../styles/header.scss');
+@import url('../styles/advantages.scss');
+@import url('../styles/difference.scss');
+@import url('../styles/decisions.scss');
+@import url('../styles/costs.scss');
+@import url('../styles/footer.scss');
+@import url('../styles/reviews.scss');
+
+@import url('../styles/lenis.scss');

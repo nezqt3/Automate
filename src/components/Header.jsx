@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const navigationElements = [
   { text: "Главная", target: "start-screen" },
-  { text: "Решения", target: "" },
+  { text: "Решения", target: "decisions" },
   { text: "Кейсы", target: "" },
   { text: "О нас", target: "" },
   { text: "Контакты", target: "" },

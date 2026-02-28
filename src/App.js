@@ -14,11 +14,10 @@ function App() {
       <StartScreen />
       <Advantages />
       <Difference />
+      <Decisions />
 
       <Costs />
       <Footer />
-
-      <Decisions/>
     </div>
   );
 }

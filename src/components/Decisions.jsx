@@ -1,73 +1,116 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
+
+const slides = [
+  {
+    number: "01",
+    title: "Диагностика процессов",
+    text: "Определяем узкие места и задачи, которые можно автоматизировать без боли и долгих внедрений.",
+    tag: "Быстрый старт",
+  },
+  {
+    number: "02",
+    title: "Сценарии автоматизации",
+    text: "Собираем цепочку действий так, чтобы решения работали сразу и масштабировались под рост.",
+    tag: "Без лишних шагов",
+  },
+  {
+    number: "03",
+    title: "Визуальные отчеты",
+    text: "Вы видите результат в цифрах: скорость, экономия времени и стабильность процессов.",
+    tag: "Прозрачная польза",
+  },
+];
 
 export default function Decisions() {
-  const [transformSlider, setTransformSlider] = useState(0);
-  const sliderRef = useRef(null);
+  const sectionRef = useRef(null);
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const targetX = useRef(0);
+  const currentX = useRef(0);
+  const rafRef = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sliderRect = sliderRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    const section = sectionRef.current;
+    const track = trackRef.current;
 
-      // Проверяем видимость элемента
-      const isVisible = sliderRect.top < windowHeight && sliderRect.bottom > 0;
-      if (!isVisible) {
-        setTransformSlider(0);
-        return;
-      }
+    if (!section || !track) return undefined;
 
-      const scrollPosition = window.scrollY;
-      const sliderTop = sliderRect.top + scrollPosition; // Корректная позиция
-      const sliderHeight = sliderRect.height;
+    const update = () => {
+      const viewportWidth =
+        viewportRef.current?.offsetWidth || window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      const totalScrollX = Math.max(0, track.scrollWidth - viewportWidth);
 
-      // Диапазон прокрутки: от входа в viewport до полного выхода
-      const startScroll = sliderTop - windowHeight;
-      const endScroll = sliderTop + sliderHeight;
-      const maxScroll = endScroll - startScroll;
+      section.style.height = `${totalScrollX + viewportHeight}px`;
 
-      // Текущая позиция прокрутки внутри диапазона
-      const currentScroll = Math.max(0, scrollPosition - startScroll);
-      let progress = currentScroll / maxScroll;
-      progress = Math.min(1, progress); // Не ограничиваем снизу (может быть >1)
+      const rect = section.getBoundingClientRect();
+      const maxScroll = totalScrollX;
+      const scrolled = Math.min(Math.max(-rect.top, 0), maxScroll);
+      const progress = maxScroll ? scrolled / maxScroll : 0;
 
-      // Рассчитываем сдвиг с учётом количества слайдов
-      const totalSlides = 3;
-      const slideWidthPercent = 100 / totalSlides; // 33.33% на слайд
-      const maxSlideOffset = (totalSlides - 1) * 100; // 200% для 3 слайдов
-
-      const slideOffset = progress * maxSlideOffset;
-      setTransformSlider(slideOffset);
+      targetX.current = -progress * totalScrollX;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
+    const animate = () => {
+      const delta = targetX.current - currentX.current;
+      currentX.current += delta * 0.12;
 
-    handleScroll(); // Инициализация
+      track.style.transform = `translate3d(${currentX.current}px, 0, 0)`;
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    const onScroll = () => update();
+    const onResize = () => update();
+
+    update();
+    rafRef.current = requestAnimationFrame(animate);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
   return (
-    <div
-      ref={sliderRef}
-      id="scroll-slider"
-      style={{
-        width: "100vw",
-        overflowX: "hidden",
-        transform: `translateX(-${transformSlider}%)`,
-        transition: "transform 0.3s ease-out",
-        border: "1px solid #ddd",
-        boxSizing: "border-box",
-      }}
-    >
-      <div style={{ display: "flex", width: "310%", height: "500px", gap: 25 }}>
-        <div style={{ width: "100%", background: "red" }}>Слайд 1</div>
-        <div style={{ width: "100%", background: "blue" }}>Слайд 2</div>
-        <div style={{ width: "100%", background: "green" }}>Слайд 3</div>
+    <section className="decisions-section" ref={sectionRef} id="decisions">
+      <div className="decisions-sticky">
+        <div className="decisions-header">
+          <div>
+            <p className="decisions-eyebrow">Информативный блок</p>
+            <h2>Решения, которые объясняют себя</h2>
+          </div>
+          <p className="decisions-subtitle">
+            Листайте вниз — блок плавно поедет вправо и покажет ключевые
+            преимущества автоматизации.
+          </p>
+        </div>
+
+        <div className="decisions-viewport" ref={viewportRef}>
+          <div className="decisions-track" ref={trackRef}>
+            {slides.map((slide) => (
+              <article className="decisions-card" key={slide.number}>
+                <div className="decisions-card-top">
+                  <span className="decisions-card-number">{slide.number}</span>
+                  <span className="decisions-card-tag">{slide.tag}</span>
+                </div>
+                <div className="decisions-card-body">
+                  <h3>{slide.title}</h3>
+                  <p>{slide.text}</p>
+                </div>
+                <div className="decisions-card-footer">
+                  <span>Automate</span>
+                  <span className="decisions-card-dot" />
+                  <span>Проверено на практике</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

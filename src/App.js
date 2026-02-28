@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
+import Reviews from './components/Reviews';
 
 function App() {
   useEffect(() => {
@@ -39,7 +40,7 @@ function App() {
       <Advantages />
       <Difference />
       <Decisions />
-
+      <Reviews />
       <Costs />
       <Footer />
     </div>

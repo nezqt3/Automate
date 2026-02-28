@@ -1,3 +1,8 @@
+<video src="./src/videos/video.mp4" autoPlay
+            muted
+            loop
+            playsInline></video>
+
 <h1>automate</h1>
 
 ### 🧰 Стэк технологий

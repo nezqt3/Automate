@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-header">
         <h2 className="footer-header__title">AUTOMATE</h2>
-        <h2 className="footer-header__title-under">AUTOMATE</h2>
+        {/* <h2 className="footer-header__title-under">AUTOMATE</h2> */}
       </div>
 
       <div className="footer-bottom">

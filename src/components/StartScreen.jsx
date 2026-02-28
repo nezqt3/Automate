@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
 import Bubble from '../static/buble-main copy.png';
 
 const words = ['ваш бизнес', 'на', 'полном', 'автопилоте'];
@@ -28,7 +29,9 @@ export default function StartScreen() {
     let currentLetter = 0;
 
     const animate = () => {
-      if (currentWord >= lettersPerWord.length) return;
+      if (currentWord >= lettersPerWord.length) {
+        return;
+      }
 
       setDisplayedWords((prev) => {
         const newWords = [...prev];

@@ -1,5 +1,6 @@
-import Video from '../videos/video_reviews.mp4';
 import { useState } from 'react';
+
+import Video from '../videos/video_reviews.mp4';
 
 const REVIEWS = [
   {
@@ -64,8 +65,8 @@ export default function Reviews() {
               <div className="reviews-who">Основатель агентства</div>
             </div>
             <p className="reviews-review reviews-review--video">
-              После внедрения CRM и автоматизации маркетинга мы экономим до 15 часов в неделю.
-              Всё чётко и прозрачно!
+              После внедрения CRM и автоматизации маркетинга мы экономим до 15 часов в неделю. Всё
+              чётко и прозрачно!
             </p>
           </div>
           <p className="reviews-company reviews-company--video">Automate</p>

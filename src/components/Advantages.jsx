@@ -1,9 +1,9 @@
-import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import DarkImage from "../static/black-bubble.png";
-import GrayImage from "../static/gray-bubble.png";
+import DarkImage from '../static/black-bubble.png';
+import GrayImage from '../static/gray-bubble.png';
 
 export default function Advantages() {
   const [titleAnimation, setTitleAnimation] = useState({
@@ -15,40 +15,40 @@ export default function Advantages() {
 
   const content = [
     {
-      nonActiveTitle: "Ручные операции",
-      activeTitle: "Полная\nавтоматизация",
-      nonActiveText: "Сотрудники тратят часы на однотипные задачи вместо важных дел",
-      activeText: "Роботы выполняют рутину вместо людей 24/7 без ошибок",
+      nonActiveTitle: 'Ручные операции',
+      activeTitle: 'Полная\nавтоматизация',
+      nonActiveText: 'Сотрудники тратят часы на однотипные задачи вместо важных дел',
+      activeText: 'Роботы выполняют рутину вместо людей 24/7 без ошибок',
     },
     {
-      nonActiveTitle: "Хаос в данных",
-      activeTitle: "Единая платформа",
-      nonActiveText: "Информация разбросана по разным системам, нет единой картины",
-      activeText: "Все данные и процессы собраны в одной системе управления\n",
+      nonActiveTitle: 'Хаос в данных',
+      activeTitle: 'Единая платформа',
+      nonActiveText: 'Информация разбросана по разным системам, нет единой картины',
+      activeText: 'Все данные и процессы собраны в одной системе управления\n',
     },
     {
-      nonActiveTitle: "Ошибки и просрочки",
-      activeTitle: "Полная\nавтоматизация",
-      nonActiveText: "Человеческий фактор стоит денег и портит репутацию\n",
-      activeText: "Роботы выполняют рутину вместо людей 24/7 без ошибок",
+      nonActiveTitle: 'Ошибки и просрочки',
+      activeTitle: 'Полная\nавтоматизация',
+      nonActiveText: 'Человеческий фактор стоит денег и портит репутацию\n',
+      activeText: 'Роботы выполняют рутину вместо людей 24/7 без ошибок',
     },
     {
-      nonActiveTitle: "Медленная коммуникация",
-      activeTitle: "Единая платформа",
-      nonActiveText: "Клиенты ждут ответа, менеджеры не успевают обрабатывать заявки",
-      activeText: "Все данные и процессы собраны в одной системе управления\n",
+      nonActiveTitle: 'Медленная коммуникация',
+      activeTitle: 'Единая платформа',
+      nonActiveText: 'Клиенты ждут ответа, менеджеры не успевают обрабатывать заявки',
+      activeText: 'Все данные и процессы собраны в одной системе управления\n',
     },
     {
-      nonActiveTitle: "Невозможно масштабировать",
-      activeTitle: "Полная\nавтоматизация",
-      nonActiveText: "Рост количества клиентов или заказов приводит к хаосу и перегрузке",
-      activeText: "Роботы выполняют рутину вместо людей 24/7 без ошибок",
+      nonActiveTitle: 'Невозможно масштабировать',
+      activeTitle: 'Полная\nавтоматизация',
+      nonActiveText: 'Рост количества клиентов или заказов приводит к хаосу и перегрузке',
+      activeText: 'Роботы выполняют рутину вместо людей 24/7 без ошибок',
     },
   ];
 
   const renderTextWithBreaks = (text) =>
-    text.split("\n").map((line, index, array) =>
-      line === "" ? (
+    text.split('\n').map((line, index, array) =>
+      line === '' ? (
         <br key={`empty-${index}`} />
       ) : (
         <span key={index}>
@@ -67,8 +67,8 @@ export default function Advantages() {
 
   useEffect(() => {
     if (card1Ref.inView && !titleAnimation.isAnimated) {
-      const text = "automate.";
-      const letters = text.split("").map((char, index) => ({
+      const text = 'automate.';
+      const letters = text.split('').map((char, index) => ({
         char,
         delay: index * 0.05,
       }));
@@ -104,7 +104,7 @@ export default function Advantages() {
         <motion.div
           ref={card1Ref.ref}
           initial="hidden"
-          animate={card1Ref.inView ? "visible" : "hidden"}
+          animate={card1Ref.inView ? 'visible' : 'hidden'}
           variants={cardVariants}
           className="advantages-dark-gray"
           onMouseEnter={() => handleMouse(0, true)}
@@ -126,7 +126,7 @@ export default function Advantages() {
           <motion.div
             ref={card2Ref.ref}
             initial="hidden"
-            animate={card2Ref.inView ? "visible" : "hidden"}
+            animate={card2Ref.inView ? 'visible' : 'hidden'}
             variants={cardVariants}
             className="advantages-non-bg"
             onMouseEnter={() => handleMouse(1, true)}
@@ -147,7 +147,7 @@ export default function Advantages() {
           <motion.div
             ref={card3Ref.ref}
             initial="hidden"
-            animate={card3Ref.inView ? "visible" : "hidden"}
+            animate={card3Ref.inView ? 'visible' : 'hidden'}
             variants={cardVariants}
             className="advantages-dark-gray"
             onMouseEnter={() => handleMouse(2, true)}
@@ -171,7 +171,7 @@ export default function Advantages() {
         <motion.div
           ref={card4Ref.ref}
           initial="hidden"
-          animate={card4Ref.inView ? "visible" : "hidden"}
+          animate={card4Ref.inView ? 'visible' : 'hidden'}
           variants={cardVariants}
           className="advantages-non-bg"
           onMouseEnter={() => handleMouse(3, true)}
@@ -192,7 +192,7 @@ export default function Advantages() {
         <motion.div
           ref={card5Ref.ref}
           initial="hidden"
-          animate={card5Ref.inView ? "visible" : "hidden"}
+          animate={card5Ref.inView ? 'visible' : 'hidden'}
           variants={cardVariants}
           className="advantages-dark-gray"
           onMouseEnter={() => handleMouse(4, true)}
@@ -219,7 +219,7 @@ export default function Advantages() {
             initial="hidden"
             animate="visible"
             variants={letterVariants}
-            style={{ display: "inline-block", whiteSpace: "pre" }}
+            style={{ display: 'inline-block', whiteSpace: 'pre' }}
           >
             {letter.char}
           </motion.span>

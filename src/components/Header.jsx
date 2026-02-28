@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 const navigationElements = [
-  { text: "Главная", target: "start-screen" },
-  { text: "Решения", target: "decisions" },
-  { text: "Кейсы", target: "" },
-  { text: "О нас", target: "" },
-  { text: "Контакты", target: "" },
+  { text: 'Главная', target: 'start-screen' },
+  { text: 'Решения', target: 'decisions' },
+  { text: 'Кейсы', target: '' },
+  { text: 'О нас', target: '' },
+  { text: 'Контакты', target: '' },
 ];
 
 export default function Header() {
@@ -13,7 +13,7 @@ export default function Header() {
     const section = document.getElementById(target);
     if (section) {
       section.scrollIntoView({
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
   };
@@ -33,12 +33,7 @@ export default function Header() {
   };
 
   return (
-    <motion.div
-      className="header"
-      initial="hidden"
-      animate="visible"
-      variants={headerVariants}
-    >
+    <motion.div className="header" initial="hidden" animate="visible" variants={headerVariants}>
       <p className="header-logo">automate.</p>
 
       <nav className="header-navigation">

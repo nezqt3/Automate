@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.901a437c.css",
+    "main.js": "/static/js/main.e9931949.js",
+    "static/media/gray-bubble.png": "/static/media/gray-bubble.04f4d56f271b7cf0601e.png",
+    "static/media/black-bubble.png": "/static/media/black-bubble.0462dfd72a482ed21a16.png",
+    "static/media/buble-main copy.png": "/static/media/buble-main copy.2f3427ba7961bd4ac120.png",
+    "static/media/front-face.png": "/static/media/front-face.4223e531246551678411.png",
+    "static/media/right-face.png": "/static/media/right-face.e988eb3b223f5b97ab51.png",
+    "static/media/left-face.png": "/static/media/left-face.529170d8eff6bf92b52d.png",
+    "static/media/video_reviews.mp4": "/static/media/video_reviews.acaf8e3198594372441d.mp4",
+    "index.html": "/index.html",
+    "static/media/arrow-45.svg": "/static/media/arrow-45.215663ace7de0a7be24b.svg",
+    "static/media/arrow-with-circle.svg": "/static/media/arrow-with-circle.3270c5fa7c72d6fdd8db.svg",
+    "main.901a437c.css.map": "/static/css/main.901a437c.css.map",
+    "main.e9931949.js.map": "/static/js/main.e9931949.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.901a437c.css",
+    "static/js/main.e9931949.js"
+  ]
+}

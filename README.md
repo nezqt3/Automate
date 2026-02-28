@@ -1,12 +1,36 @@
 ![Video](./src/videos/video.gif)
 
-<h1>automate</h1>
+# automate
+
+Автоматизация бизнес-процессов, маркетинга и поддержки клиентов с помощью современных веб-технологий.  
+С нашим решением вы экономите время, ресурсы и повышаете эффективность команд.
+
+---
 
 ### 🧰 Стэк технологий
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff)
-![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=fff)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?logo=framer&logoColor=fff)
+Мы используем только передовые инструменты для надежной и масштабируемой работы:
+
+| Технология                                                                                             | Описание                                                      |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff)                           | Семантическая и структурированная разметка для веб-приложений |
+| ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff)                              | Стиль и адаптивный дизайн                                     |
+| ![SCSS](https://img.shields.io/badge/SCSS-CC6699?logo=sass&logoColor=fff)                              | Мощная организация стилей с переменными и миксинами           |
+| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)            | Динамика и интерактивность на клиентской стороне              |
+| ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000)                           | Современные UI-компоненты и управление состоянием             |
+| ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?logo=framer&logoColor=fff)          | Плавная анимация и интерактивные элементы                     |
+| ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)                        | Контейнеризация для стабильной работы на любых серверах       |
+| ![Nginx](https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=fff)                           | Быстрый и надежный веб-сервер для продакшена                  |
+| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=fff) | Автоматизация CI/CD: деплой, тестирование и сборка            |
+
+### ⚡ Почему Automate?
+
+- 📈 Повышение конверсии и сокращение времени на рутину
+- 🤖 AI-ассистенты и чат-боты для поддержки клиентов
+- ⚡ Мгновенный отклик и прозрачность процессов
+- 🛠️ Надежный стек и автоматизация деплоя
+- 🌐 Работает в любом браузере и на любом устройстве
+
+---
+
+Готово к использованию прямо сегодня – автоматизируйте задачи и улучшайте бизнес без лишних усилий!

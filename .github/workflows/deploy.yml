@@ -20,14 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: TypeScript check
-        run: npm run ts-check
-
       - name: Lint files
-        run: npm run lint-files
+        run: npm run lint
 
-      - name: Prettier check (optional)
-        run: npm run format-files -- --check
+      - name: Prettier check
+        run: npm run format:check
 
       - name: Build project
         run: npm run build

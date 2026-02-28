@@ -26,6 +26,7 @@ export default function Decisions() {
 
   const [slideIndex, setSlideIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   const [currentSlide, setCurrentSlide] = useState(slides[slideIndex]);
 
@@ -35,7 +36,7 @@ export default function Decisions() {
       return;
     }
 
-    const totalHeight = window.innerHeight * 3; // 3 слайда = 3 экрана высоты
+    const totalHeight = window.innerHeight * slides.length * 3; // 3 экрана на слайд
     section.style.height = `${totalHeight}px`;
 
     let ticking = false;
@@ -44,10 +45,11 @@ export default function Decisions() {
       const rect = section.getBoundingClientRect();
       const scrolled = Math.max(0, -rect.top);
       const totalScroll = totalHeight - window.innerHeight;
-      const newProgress = Math.min(scrolled / totalScroll, 1); // прогресс от 0 до 1 для каждого слайда
+      const newProgress = Math.min(scrolled / totalScroll, 1);
+      const slideIndexLocal = Math.min(Math.floor(newProgress * slides.length), slides.length - 1);
 
-      // Определяем активный слайд (0-33% = 1, 33-66% = 2, 66-100% = 3)
-      const slideIndexLocal = Math.min(Math.floor(newProgress * 3), 2);
+      setDirection(slideIndexLocal > slideIndex ? 1 : -1);
+
       setSlideIndex(slideIndexLocal);
       setCurrentSlide(slides[slideIndexLocal]);
       setProgress(newProgress);
@@ -68,7 +70,7 @@ export default function Decisions() {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [slideIndex]);
 
   return (
     <section className="decisions-section" ref={sectionRef} id="decisions">
@@ -79,11 +81,11 @@ export default function Decisions() {
               <motion.article
                 className="decisions-card"
                 key={currentSlide.number}
-                initial={{ opacity: 0, y: 60, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -40, scale: 0.98 }}
+                initial={{ opacity: 0, x: 60 * direction, scale: 0.98 }} // справа или слева
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -60 * direction, scale: 0.98 }} // уход в другую сторону
                 transition={{
-                  duration: 0.2,
+                  duration: 0.3,
                   ease: [0.25, 0.46, 0.45, 0.94],
                 }}
               >

@@ -3,14 +3,14 @@ import '../src/styles/main.scss';
 import Lenis from '@studio-freight/lenis';
 import { useEffect } from 'react';
 
-import Advantages from './components/Advantages';
-import Costs from './components/Costs';
-import Decisions from './components/Decisions';
-import Difference from './components/Difference';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Reviews from './components/Reviews';
-import StartScreen from './components/StartScreen';
+import Advantages from './components/Advantages.jsx';
+import Costs from './components/Costs.jsx';
+import Decisions from './components/Decisions.jsx';
+import Difference from './components/Difference.jsx';
+import Footer from './components/Footer.jsx';
+import Header from './components/Header.jsx';
+import Reviews from './components/Reviews.jsx';
+import StartScreen from './components/StartScreen.jsx';
 
 function App() {
   useEffect(() => {

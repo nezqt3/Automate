@@ -1,9 +1,8 @@
-@import "./variables";
+@import './variables';
 
 .start-screen {
   color: $white-color;
   margin-top: 119px;
-  overflow: visible !important;
   position: relative;
   margin-bottom: 240px;
 
@@ -15,7 +14,7 @@
     text-align: center;
     margin-left: 119px;
     letter-spacing: -2%;
-    margin-right: 410px;
+    margin-right: 350px;
     text-transform: uppercase;
 
     &-span {
@@ -41,12 +40,23 @@
     will-change: transform;
     transform-style: preserve-3d;
     right: 270px;
-    top: -70px; 
+    top: -70px;
   }
 }
 
 @keyframes fadeInLetter {
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width: 840px) {
+  .start-screen-title {
+    margin-right: 140px;
+    font-size: 86px;
+
+    &-span {
+      margin-right: 50px;
+    }
   }
 }

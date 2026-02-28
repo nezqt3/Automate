@@ -63,6 +63,12 @@
         display: flex;
         flex-direction: row;
         gap: 7px;
+
+        & .reviews-who {
+          border-color: hsl(0, 0%, 100%, 0.2);
+          color: white;
+          opacity: 1;
+        }
       }
     }
   }
@@ -94,6 +100,13 @@
   width: 273px;
 }
 
+.reviews-review--video {
+  font-size: 30px;
+  line-height: 100%;
+  color: white;
+  width: 614px;
+}
+
 .reviews-company {
   font-weight: 600;
   font-size: 16px;
@@ -101,4 +114,37 @@
   letter-spacing: -2%;
   opacity: 0.6;
   color: #8be149;
+}
+
+.reviews-company--video {
+  color: white;
+  opacity: 1;
+}
+
+.reviews-tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.85); // тёмный фон, немного прозрачный
+  color: #8be149; // твой зелёный цвет
+  border: 1px solid rgba(139, 225, 73, 0.5); // тонкая зелёная рамка
+  border-radius: 20px; // круглые края, как у карточек
+  padding: 12px 18px;
+  pointer-events: none;
+  z-index: 1000;
+  max-width: 260px;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); // мягкая тень
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  opacity: 0.95;
+
+  div:first-child {
+    font-weight: 600; // profession выделяем жирнее
+    font-size: 16px;
+  }
 }

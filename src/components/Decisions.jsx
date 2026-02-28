@@ -1,23 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
   {
-    number: "01",
-    title: "Диагностика процессов",
-    text: "Определяем узкие места и задачи, которые можно автоматизировать без боли и долгих внедрений.",
-    tag: "Быстрый старт",
+    number: '01',
+    title: 'Анализ — разбираем процессы и выявляем точки роста.',
+    text: 'Совместно с вашей командой погружаемся в задачи и определяем, где технологии принесут максимальную пользу.',
   },
   {
-    number: "02",
-    title: "Сценарии автоматизации",
-    text: "Собираем цепочку действий так, чтобы решения работали сразу и масштабировались под рост.",
-    tag: "Без лишних шагов",
+    number: '02',
+    title: 'Система — создаём и настраиваем автоматизаицю под ваш бизнес.',
+    text: 'Не просто «сдаём проект», а помогаем вашей команде освоить инструмент и начать получать от него результат.',
   },
   {
-    number: "03",
-    title: "Визуальные отчеты",
-    text: "Вы видите результат в цифрах: скорость, экономия времени и стабильность процессов.",
-    tag: "Прозрачная польза",
+    number: '03',
+    title: 'Запуск — внедряем решения и сопровождаем до стабильной работы.',
+    text: 'Воплощаем найденные решения в готовый продукт — удобный цифровой помощник для ваших сотрудников и клиентов.',
   },
 ];
 
@@ -25,89 +23,108 @@ export default function Decisions() {
   const sectionRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
-  const targetX = useRef(0);
-  const currentX = useRef(0);
-  const rafRef = useRef(0);
+
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  const [currentSlide, setCurrentSlide] = useState(slides[slideIndex]);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const track = trackRef.current;
+    if (!section) return;
 
-    if (!section || !track) return undefined;
+    const totalHeight = window.innerHeight * 3; // 3 слайда = 3 экрана высоты
+    section.style.height = `${totalHeight}px`;
+
+    let ticking = false;
 
     const update = () => {
-      const viewportWidth =
-        viewportRef.current?.offsetWidth || window.innerWidth;
-      const viewportHeight = window.innerHeight;
-      const totalScrollX = Math.max(0, track.scrollWidth - viewportWidth);
-
-      section.style.height = `${totalScrollX + viewportHeight}px`;
-
       const rect = section.getBoundingClientRect();
-      const maxScroll = totalScrollX;
-      const scrolled = Math.min(Math.max(-rect.top, 0), maxScroll);
-      const progress = maxScroll ? scrolled / maxScroll : 0;
+      const scrolled = Math.max(0, -rect.top);
+      const totalScroll = totalHeight - window.innerHeight;
+      const newProgress = Math.min(scrolled / totalScroll, 1); // прогресс от 0 до 1 для каждого слайда
 
-      targetX.current = -progress * totalScrollX;
+      // Определяем активный слайд (0-33% = 1, 33-66% = 2, 66-100% = 3)
+      const slideIndexLocal = Math.min(Math.floor(newProgress * 3), 2);
+      setSlideIndex(slideIndexLocal);
+      setCurrentSlide(slides[slideIndexLocal]);
+      setProgress(newProgress);
+
+      ticking = false;
     };
 
-    const animate = () => {
-      const delta = targetX.current - currentX.current;
-      currentX.current += delta * 0.12;
-
-      track.style.transform = `translate3d(${currentX.current}px, 0, 0)`;
-      rafRef.current = requestAnimationFrame(animate);
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
     };
-
-    const onScroll = () => update();
-    const onResize = () => update();
 
     update();
-    rafRef.current = requestAnimationFrame(animate);
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-      cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
 
   return (
     <section className="decisions-section" ref={sectionRef} id="decisions">
       <div className="decisions-sticky">
-        <div className="decisions-header">
-          <div>
-            <p className="decisions-eyebrow">Информативный блок</p>
-            <h2>Решения, которые объясняют себя</h2>
-          </div>
-          <p className="decisions-subtitle">
-            Листайте вниз — блок плавно поедет вправо и покажет ключевые
-            преимущества автоматизации.
-          </p>
-        </div>
-
         <div className="decisions-viewport" ref={viewportRef}>
           <div className="decisions-track" ref={trackRef}>
-            {slides.map((slide) => (
-              <article className="decisions-card" key={slide.number}>
-                <div className="decisions-card-top">
-                  <span className="decisions-card-number">{slide.number}</span>
-                  <span className="decisions-card-tag">{slide.tag}</span>
-                </div>
-                <div className="decisions-card-body">
-                  <h3>{slide.title}</h3>
-                  <p>{slide.text}</p>
-                </div>
+            <AnimatePresence mode="wait">
+              <motion.article
+                className="decisions-card"
+                key={currentSlide.number}
+                initial={{ opacity: 0, y: 60, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -40, scale: 0.98 }}
+                transition={{
+                  duration: 0.2,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+              >
+                <motion.div
+                  className="decisions-card-body"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                  <p>{currentSlide.text}</p>
+                  <h3>
+                    <span>{currentSlide.title.split(' ')[0].replace('—', '')}</span>
+                    {currentSlide.title.split(' ')[0].includes('—') ? '—' : ''}{' '}
+                    {currentSlide.title.split(' ').slice(1).join(' ')}
+                  </h3>
+                </motion.div>
                 <div className="decisions-card-footer">
-                  <span>Automate</span>
-                  <span className="decisions-card-dot" />
-                  <span>Проверено на практике</span>
+                  <div className="decisions-card-footer__info">
+                    <span>Automate</span>
+                    <span>Ваш рост в режиме автопилота.</span>
+                  </div>
+                  <div className="decisions-card-footer__dots">
+                    <div className={`dot ${slideIndex === 0 ? 'active' : ''}`}>01</div>
+                    <div className="block-line-dot">
+                      <div
+                        className="line-dot line1"
+                        style={{ width: `${Math.min(progress * 3, 1) * 100}%` }}
+                      />
+                    </div>
+                    <div className={`dot ${slideIndex === 1 ? 'active' : ''}`}>02</div>
+                    <div className="block-line-dot">
+                      <div
+                        className="line-dot line2"
+                        style={{
+                          width: `${Math.max(0, Math.min((progress - 1 / 3) * 3, 1)) * 100}%`,
+                        }}
+                      />
+                    </div>
+                    <div className={`dot ${slideIndex === 2 ? 'active' : ''}`}>03</div>
+                  </div>
                 </div>
-              </article>
-            ))}
+              </motion.article>
+            </AnimatePresence>
           </div>
         </div>
       </div>

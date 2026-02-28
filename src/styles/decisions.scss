@@ -1,10 +1,8 @@
-@import "./variables";
+@import './variables';
 
 .decisions-section {
   position: relative;
   width: 100%;
-  margin-top: 180px;
-  margin-bottom: 180px;
   color: $white-color;
 }
 
@@ -17,30 +15,6 @@
   justify-content: center;
   gap: 48px;
   overflow: hidden;
-  padding: 20px 0 40px;
-}
-
-.decisions-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 48px;
-}
-
-.decisions-eyebrow {
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.24em;
-  color: $light-white-color;
-  margin-bottom: 12px;
-}
-
-.decisions-header h2 {
-  font-size: 56px;
-  line-height: 110%;
-  font-weight: 500;
-  text-transform: uppercase;
-  max-width: 560px;
 }
 
 .decisions-subtitle {
@@ -58,133 +32,121 @@
 
 .decisions-track {
   display: flex;
-  padding: 40px 32px;
   will-change: transform;
 }
 
 .decisions-card {
   flex: 0 0 70vw;
-  margin-right: 28px;
-  background: linear-gradient(
-    150deg,
-    rgba(58, 58, 58, 0.7),
-    rgba(26, 26, 26, 0.9)
-  );
+  background: #1a1a1a;
   border-radius: 24px;
   padding: 32px;
+  padding: 80px 45px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 360px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  min-height: 700px;
 }
 
 .decisions-card:first-child {
   flex-basis: 100%;
 }
 
-.decisions-card-top {
+.decisions-card-body {
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.decisions-card-number {
-  font-size: 20px;
-  font-weight: 500;
-  color: $light-green;
-}
-
-.decisions-card-tag {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: $light-white-color;
 }
 
 .decisions-card-body h3 {
-  font-size: 28px;
-  line-height: 120%;
-  font-weight: 500;
-  margin-bottom: 16px;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 68px;
+  line-height: 111.00000000000001%;
+  letter-spacing: -3%;
+  white-space: pre-wrap;
+  max-width: 858px;
+  text-transform: uppercase;
+
+  span {
+    color: #8be149;
+  }
 }
 
 .decisions-card-body p {
+  font-family: Manrope;
+  white-space: pre-wrap;
+  font-weight: 400;
+  font-style: Regular;
   font-size: 16px;
-  line-height: 150%;
-  color: $light-white-color;
+  width: 320px;
+  line-height: 120%;
+  letter-spacing: -2%;
 }
 
 .decisions-card-footer {
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.decisions-card-footer__info {
+  display: flex;
+  flex-direction: column;
+  max-width: 180px;
+
+  & span {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: -2%;
+  }
+
+  & span:last-child {
+    opacity: 0.6;
+  }
+}
+
+.decisions-card-footer__dots {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: $light-white-color;
-  margin-top: 32px;
-}
 
-.decisions-card-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: $light-green;
-  display: inline-block;
-}
+  & .dot {
+    font-family: Manrope;
+    font-weight: 600;
+    font-style: SemiBold;
+    font-size: 30px;
+    line-height: 111.00000000000001%;
+    letter-spacing: -3%;
+    text-transform: uppercase;
+    color: #8be149;
+    padding: 44px;
+    border-radius: 100%;
+    border: 1px solid #8be149;
 
-@media (max-width: 900px) {
-  .decisions-header {
-    flex-direction: column;
-    align-items: flex-start;
+    &.active {
+      background-color: #8be149;
+      color: #474747;
+    }
   }
 
-  .decisions-header h2 {
-    font-size: 40px;
+  .block-line-dot {
+    width: 263px;
+    background-color: rgb(139, 225, 73, 0.2);
+    height: 1px;
+    overflow: hidden;
   }
 
-  .decisions-subtitle {
-    max-width: 100%;
-  }
-
-  .decisions-card {
-    flex-basis: 80vw;
-  }
-}
-
-@media (max-width: 600px) {
-  .decisions-section {
-    margin-top: 120px;
-    margin-bottom: 120px;
-  }
-
-  .decisions-sticky {
-    gap: 32px;
-  }
-
-  .decisions-header h2 {
-    font-size: 32px;
-  }
-
-  .decisions-viewport {
-    border-radius: 22px;
-  }
-
-  .decisions-track {
-    padding: 28px 20px;
-  }
-
-  .decisions-card {
-    padding: 24px;
-    min-height: 320px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .decisions-track {
-    transition: none;
+  .line-dot {
+    height: 1px;
+    width: 0;
+    position: relative;
+    border: none;
+    background-color: #8be149;
+    z-index: 1000;
+    opacity: 1;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }

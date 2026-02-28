@@ -1,7 +1,4 @@
-<video src="./src/videos/video.mp4" autoPlay
-            muted
-            loop
-            playsInline></video>
+![Video](./src/videos/video.gif)
 
 <h1>automate</h1>
 

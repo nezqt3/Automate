@@ -55,12 +55,16 @@
       white-space: pre-line;
       color: $white-color;
       margin-bottom: 20px;
+      line-height: 16px;
+      min-height: calc(16px * 2);
     }
 
     &-text {
       white-space: pre-line;
       color: $light-white-color;
       margin-bottom: 66px;
+      line-height: 24px;
+      min-height: calc(24px * 3);
     }
 
     &-button {
@@ -93,7 +97,7 @@
         margin-top: 2px;
         height: 9px;
         display: block;
-        background-image: url('../../static/arrow-45.svg');
+        background-image: url('../../shared/assets/static/arrow-45.svg');
       }
     }
 
@@ -138,12 +142,16 @@
       white-space: pre-line;
       color: $white-color;
       margin-bottom: 20px;
+      line-height: 16px;
+      min-height: calc(16px * 2);
     }
 
     &-text {
       white-space: pre-line;
       color: $light-white-color;
       margin-bottom: 66px;
+      line-height: 24px;
+      min-height: calc(24px * 3);
     }
 
     &-button {
@@ -178,7 +186,7 @@
         text-align: center;
         display: block;
         margin-top: 2px;
-        background-image: url('../../static/arrow-45.svg');
+        background-image: url('../../shared/assets/static/arrow-45.svg');
       }
     }
 

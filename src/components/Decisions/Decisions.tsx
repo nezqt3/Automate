@@ -3,23 +3,7 @@ import './Decisions.scss';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
-const slides = [
-  {
-    number: '01',
-    title: 'Анализ — разбираем процессы и выявляем точки роста.',
-    text: 'Совместно с вашей командой погружаемся в задачи и определяем, где технологии принесут максимальную пользу.',
-  },
-  {
-    number: '02',
-    title: 'Система — создаём и настраиваем автоматизаицю под ваш бизнес.',
-    text: 'Не просто «сдаём проект», а помогаем вашей команде освоить инструмент и начать получать от него результат.',
-  },
-  {
-    number: '03',
-    title: 'Запуск — внедряем решения и сопровождаем до стабильной работы.',
-    text: 'Воплощаем найденные решения в готовый продукт — удобный цифровой помощник для ваших сотрудников и клиентов.',
-  },
-];
+import { slides } from './models/decisions.data';
 
 export default function Decisions() {
   const sectionRef = useRef<HTMLElement | null>(null);

@@ -2,7 +2,7 @@ import './Reviews.scss';
 
 import { type MouseEvent, useState } from 'react';
 
-import Video from '../../videos/video_reviews.mp4';
+import Video from '../../shared/assets/videos/video_reviews.mp4';
 
 const REVIEWS = [
   {

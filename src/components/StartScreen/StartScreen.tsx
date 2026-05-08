@@ -4,7 +4,7 @@ import type { Variants } from 'motion/react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { type MouseEvent, useEffect, useState } from 'react';
 
-import Bubble from '../../static/buble-main copy.png';
+import Bubble from '../../shared/assets/static/buble-main copy.png';
 
 const words = ['ваш бизнес', 'на', 'полном', 'автопилоте'];
 

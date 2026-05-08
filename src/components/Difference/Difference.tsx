@@ -1,8 +1,8 @@
 import './Difference.scss';
 
-import FrontFace from '../../static/front-face.png';
-import LeftFace from '../../static/left-face.png';
-import RightFace from '../../static/right-face.png';
+import FrontFace from '../../shared/assets/static/front-face.png';
+import LeftFace from '../../shared/assets/static/left-face.png';
+import RightFace from '../../shared/assets/static/right-face.png';
 
 export default function Difference() {
   return (

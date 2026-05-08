@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import './Reviews.scss';
 
-import Video from '../videos/video_reviews.mp4';
+import { type MouseEvent, useState } from 'react';
+
+import Video from '../../videos/video_reviews.mp4';
 
 const REVIEWS = [
   {
@@ -30,10 +32,24 @@ const REVIEWS = [
   },
 ];
 
-export default function Reviews() {
-  const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, content: null });
+type Review = (typeof REVIEWS)[number];
 
-  const handleMouseMove = (e, element) => {
+type TooltipState = {
+  visible: boolean;
+  x: number;
+  y: number;
+  content: Review | null;
+};
+
+export default function Reviews() {
+  const [tooltip, setTooltip] = useState<TooltipState>({
+    visible: false,
+    x: 0,
+    y: 0,
+    content: null,
+  });
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>, element: Review) => {
     setTooltip({
       visible: true,
       x: e.clientX + 15, // отступ от курсора
@@ -90,8 +106,8 @@ export default function Reviews() {
       </div>
       {tooltip.visible && (
         <div className="reviews-tooltip" style={{ left: tooltip.x, top: tooltip.y }}>
-          <div style={{ fontWeight: 600 }}>{tooltip.content.profession}</div>
-          <div>{tooltip.content.service}</div>
+          <div>{tooltip.content?.profession}</div>
+          <div>{tooltip.content?.service}</div>
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-@import '../styles/_variables';
+@import '../../styles/_variables';
 
 .advantages {
   min-height: 500px;
@@ -93,7 +93,7 @@
         margin-top: 2px;
         height: 9px;
         display: block;
-        background-image: url('../static/arrow-45.svg');
+        background-image: url('../../static/arrow-45.svg');
       }
     }
 
@@ -178,7 +178,7 @@
         text-align: center;
         display: block;
         margin-top: 2px;
-        background-image: url('../static/arrow-45.svg');
+        background-image: url('../../static/arrow-45.svg');
       }
     }
 
@@ -207,5 +207,10 @@
     font-size: 128px;
     line-height: 120%;
     letter-spacing: -5%;
+
+    &__letter {
+      display: inline-block;
+      white-space: pre;
+    }
   }
 }

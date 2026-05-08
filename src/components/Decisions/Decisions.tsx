@@ -1,4 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import './Decisions.scss';
+
+import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
 const slides = [
@@ -20,9 +22,9 @@ const slides = [
 ];
 
 export default function Decisions() {
-  const sectionRef = useRef(null);
-  const viewportRef = useRef(null);
-  const trackRef = useRef(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
   const [slideIndex, setSlideIndex] = useState(0);
   const [progress, setProgress] = useState(0);

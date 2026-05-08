@@ -1,3 +1,5 @@
+import './Costs.scss';
+
 export default function Costs() {
   const services = [
     {
@@ -44,7 +46,7 @@ export default function Costs() {
         <tbody>
           {services.map((elem) => {
             return (
-              <tr>
+              <tr key={elem.id}>
                 <td>
                   <h3>{elem.title}</h3>
                 </td>

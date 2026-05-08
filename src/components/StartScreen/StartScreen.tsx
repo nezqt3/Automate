@@ -1,7 +1,10 @@
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import './StartScreen.scss';
 
-import Bubble from '../static/buble-main copy.png';
+import type { Variants } from 'motion/react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
+import { type MouseEvent, useEffect, useState } from 'react';
+
+import Bubble from '../../static/buble-main copy.png';
 
 const words = ['ваш бизнес', 'на', 'полном', 'автопилоте'];
 
@@ -14,7 +17,7 @@ export default function StartScreen() {
 
   const [displayedWords, setDisplayedWords] = useState(words.map(() => ''));
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const { innerWidth, innerHeight } = window;
     const x = (e.clientX / innerWidth - 0.5) * 2; // -1..1
     const y = (e.clientY / innerHeight - 0.5) * 2; // -1..1
@@ -58,7 +61,7 @@ export default function StartScreen() {
   const letterVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 20 } },
-  };
+  } satisfies Variants;
 
   return (
     <div className="start-screen" onMouseMove={handleMouseMove}>
@@ -66,8 +69,7 @@ export default function StartScreen() {
         {displayedWords.map((word, wIdx) => (
           <span
             key={wIdx}
-            style={{ display: 'block' }}
-            className={wIdx === 3 ? 'start-screen-title-span' : ''}
+            className={wIdx === 3 ? 'start-screen-title-span' : 'start-screen-title-line'}
           >
             {word.split('').map((letter, i) => (
               <motion.span
@@ -76,7 +78,7 @@ export default function StartScreen() {
                 animate="visible"
                 variants={letterVariants}
                 transition={{ delay: i * 0.03 + wIdx * 0.2 }}
-                style={{ display: 'inline-block', whiteSpace: 'pre' }}
+                className="start-screen-title-letter"
               >
                 {letter}
               </motion.span>

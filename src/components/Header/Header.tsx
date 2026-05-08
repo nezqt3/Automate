@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+import './Header.scss';
+
+import { motion, type Variants } from 'motion/react';
 
 const navigationElements = [
   { text: 'Главная', target: 'start-screen' },
@@ -9,7 +11,7 @@ const navigationElements = [
 ];
 
 export default function Header() {
-  const handleNavigationClick = (target) => {
+  const handleNavigationClick = (target: string) => {
     const section = document.getElementById(target);
     if (section) {
       section.scrollIntoView({
@@ -21,16 +23,16 @@ export default function Header() {
   const headerVariants = {
     hidden: { opacity: 0, y: -10 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  };
+  } satisfies Variants;
 
   const navItemVariants = {
     hidden: { opacity: 0, y: -5 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.05, duration: 0.3 },
     }),
-  };
+  } satisfies Variants;
 
   return (
     <motion.div className="header" initial="hidden" animate="visible" variants={headerVariants}>

@@ -1,4 +1,4 @@
-@import './variables';
+@import '../../styles/_variables';
 
 .start-screen {
   color: $white-color;
@@ -18,9 +18,19 @@
     text-transform: uppercase;
 
     &-span {
+      display: block;
       margin-left: 355px;
       width: 100%;
       color: $light-green;
+    }
+
+    &-line {
+      display: block;
+    }
+
+    &-letter {
+      display: inline-block;
+      white-space: pre;
     }
   }
 

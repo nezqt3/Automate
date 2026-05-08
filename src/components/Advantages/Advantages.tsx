@@ -1,13 +1,20 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import './Advantages.scss';
+
+import { motion, type Variants } from 'motion/react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import DarkImage from '../static/black-bubble.png';
-import GrayImage from '../static/gray-bubble.png';
+import DarkImage from '../../static/black-bubble.png';
+import GrayImage from '../../static/gray-bubble.png';
+
+type AnimatedLetter = {
+  char: string;
+  delay: number;
+};
 
 export default function Advantages() {
   const [titleAnimation, setTitleAnimation] = useState({
-    letters: [],
+    letters: [] as AnimatedLetter[],
     isAnimated: false,
   });
 
@@ -46,7 +53,7 @@ export default function Advantages() {
     },
   ];
 
-  const renderTextWithBreaks = (text) =>
+  const renderTextWithBreaks = (text: string): ReactNode =>
     text.split('\n').map((line, index, array) =>
       line === '' ? (
         <br key={`empty-${index}`} />
@@ -76,7 +83,7 @@ export default function Advantages() {
     }
   }, [card1Ref.inView, titleAnimation.isAnimated]);
 
-  const handleMouse = (index, state) => {
+  const handleMouse = (index: number, state: boolean) => {
     setActiveCards((prev) => {
       const copy = [...prev];
       copy[index] = state;
@@ -87,16 +94,16 @@ export default function Advantages() {
   const cardVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  };
+  } satisfies Variants;
 
   const letterVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: { delay: i * 0.05, duration: 0.3 },
     }),
-  };
+  } satisfies Variants;
 
   return (
     <div className="advantages">
@@ -219,7 +226,7 @@ export default function Advantages() {
             initial="hidden"
             animate="visible"
             variants={letterVariants}
-            style={{ display: 'inline-block', whiteSpace: 'pre' }}
+            className="advantages-bg-title__letter"
           >
             {letter.char}
           </motion.span>

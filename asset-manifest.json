@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.20de7911.css",
-    "main.js": "/static/js/main.de91a3c0.js",
+    "main.css": "/static/css/main.f4bca283.css",
+    "main.js": "/static/js/main.849661e7.js",
     "static/media/gray-bubble.png": "/static/media/gray-bubble.04f4d56f271b7cf0601e.png",
     "static/media/black-bubble.png": "/static/media/black-bubble.0462dfd72a482ed21a16.png",
+    "static/media/video.gif": "/static/media/video.e86c6034eaca7658f4c2.gif",
     "static/media/buble-main copy.png": "/static/media/buble-main copy.2f3427ba7961bd4ac120.png",
     "static/media/front-face.png": "/static/media/front-face.4223e531246551678411.png",
     "static/media/right-face.png": "/static/media/right-face.e988eb3b223f5b97ab51.png",
@@ -12,11 +13,12 @@
     "index.html": "/index.html",
     "static/media/arrow-45.svg": "/static/media/arrow-45.215663ace7de0a7be24b.svg",
     "static/media/arrow-with-circle.svg": "/static/media/arrow-with-circle.3270c5fa7c72d6fdd8db.svg",
-    "main.20de7911.css.map": "/static/css/main.20de7911.css.map",
-    "main.de91a3c0.js.map": "/static/js/main.de91a3c0.js.map"
+    "static/media/arrow-with-circle-black.svg": "/static/media/arrow-with-circle-black.4b861f9b75b860613f7d92df28d2aae2.svg",
+    "main.f4bca283.css.map": "/static/css/main.f4bca283.css.map",
+    "main.849661e7.js.map": "/static/js/main.849661e7.js.map"
   },
   "entrypoints": [
-    "static/css/main.20de7911.css",
-    "static/js/main.de91a3c0.js"
+    "static/css/main.f4bca283.css",
+    "static/js/main.849661e7.js"
   ]
 }

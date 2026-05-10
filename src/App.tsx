@@ -6,6 +6,7 @@ import Decisions from './components/Decisions';
 import Difference from './components/Difference';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import RequestAction from './components/RequestAction';
 import Reviews from './components/Reviews';
 import StartScreen from './components/StartScreen';
 
@@ -16,9 +17,11 @@ function App() {
       <StartScreen />
       <Advantages />
       <Difference />
+
       <Decisions />
       <Reviews />
       <Costs />
+      <RequestAction />
       <Footer />
     </div>
   );

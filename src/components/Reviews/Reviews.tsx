@@ -3,43 +3,8 @@ import './Reviews.scss';
 import { type MouseEvent, useState } from 'react';
 
 import Video from '../../shared/assets/videos/video_reviews.mp4';
-
-const REVIEWS = [
-  {
-    who: 'Илья, предприниматель',
-    review: 'Теперь бизнес работает, даже когда я отдыхаю. Это лучший апгрейд за последние годы.',
-    profession: 'Предприниматель',
-    service: 'Автоматизация бизнеса',
-  },
-  {
-    who: 'Дмитрий, логистическая компания',
-    review:
-      'Экономим 30% на административных расходах после автоматизации. Система работает без сбоев.',
-    profession: 'Логист',
-    service: 'Оптимизация процессов',
-  },
-  {
-    who: 'Анна, интернет-магазин',
-    review: 'AI-ассистент сортирует заявки — конверсия выросла на 20%. Реальный результат!',
-    profession: 'Владелец интернет-магазина',
-    service: 'AI-ассистент для продаж',
-  },
-  {
-    who: 'Сергей, сервисный центр',
-    review: 'Чат-бот отвечает за 5 секунд. Освободили ресурсы для сложных задач.',
-    profession: 'Руководитель сервисного центра',
-    service: 'Чат-бот для поддержки клиентов',
-  },
-];
-
-type Review = (typeof REVIEWS)[number];
-
-type TooltipState = {
-  visible: boolean;
-  x: number;
-  y: number;
-  content: Review | null;
-};
+import { REVIEWS } from './models/reviews.data';
+import { Review, TooltipState } from './models/reviews.types';
 
 export default function Reviews() {
   const [tooltip, setTooltip] = useState<TooltipState>({

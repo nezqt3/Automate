@@ -1,6 +1,7 @@
 import '../src/styles/main.scss';
 
 import Advantages from './components/Advantages';
+import Benefits from './components/Benefits';
 import Costs from './components/Costs';
 import Decisions from './components/Decisions';
 import Difference from './components/Difference';
@@ -17,7 +18,7 @@ function App() {
       <StartScreen />
       <Advantages />
       <Difference />
-
+      <Benefits />
       <Decisions />
       <Reviews />
       <Costs />

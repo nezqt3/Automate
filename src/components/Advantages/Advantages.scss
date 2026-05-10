@@ -107,6 +107,7 @@
       .advantages-dark-gray-button {
         background-color: white;
         color: black;
+        border-color: white;
 
         &::after {
           filter: invert(100%);
@@ -196,6 +197,7 @@
       .advantages-non-bg-button {
         background-color: white;
         color: black;
+        border-color: white;
 
         &::after {
           filter: invert(100%);
